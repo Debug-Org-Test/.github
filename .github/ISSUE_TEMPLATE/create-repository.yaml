@@ -1,0 +1,94 @@
+name: Criar repositório
+description: Solicitação para criar um novo repositório.
+title: "[Create Repository]: --NomeRepositorio--"
+labels: ["create-repository"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Nomenclatura:
+          Sistema-modulo-*
+          
+        Por exemplo:
+        - SQFaaS-front-commons
+        - SiteParticipante-simulador
+        - Sinqia4Devs (monolítico)
+
+        Descrição do padrão:
+        - Devem seguir o padrão Pascal Case, ou seja, letras maiúsculas em cada divisão de texto. 
+        - Deve começar com o nome do sistema, podendo ser uma sigla ou o nome do sistema, desde que não seja muito grande, podendo conter letras maiúsculas e minúsculas.
+        - Deve-se evitar números no nome, a não ser que o sistema tenha algum em seu nome.
+        - Após o nome, o módulo ou segregação deve ser seguida de um traço.
+        - Após o módulo o recomendado é que não haja mais sub-partes, somente se isso trouxer mais informações relevantes e que traga clareza sobre o repositório.
+
+
+  - type: markdown
+    attributes:
+      value: |     
+        ## *ATENÇÃO!*
+        - Todos os repositórios precisam estar atrelados à um time para que tenham acesso de escrita. Caso o time informado não exista, a criação do repositório é feita com acesso somente de leitura.
+          Caso precise criar um novo time, abra um Jira para o time de DevOps.
+        - Repositórios criados via Issue aceleram o processo, mas ficam pendentes da análise de compliance do time de DevOps.
+          Certifique-se que os padrões descritos na documentação XPTO foram seguidos e evite atrasos nas suas entregas.
+        - Ao fim do desenvolvimento dos workflows, abra um Jira para o tipo de DevOps e solicite a análise de compliance. Não deixe para a última hora.
+        - Todos os arquivos de workflow devem seguir o padrão descrito na documentação XPTO e serão verificados no momento da análise de compliance.
+
+  - type: markdown
+    attributes:
+      value: |
+        ## :octocat: **GitHub**   
+
+  - type: input
+    id: teams
+    attributes:
+      label: "Team:"
+      description: |
+         O repositório pertence a um time já existente no GitHub? Se sim, qual o nome do time? Se não, abra um Jira para DevOps e faça este Issue após criado o Time.
+    validations:
+      required: true
+      
+  - type: input
+    id: repository-name
+    attributes:
+      label: "Nome do repositório:"
+      description: |
+        Tente seguir um padrão, como por exemplo (Sistema-modulo-* ou Sistema-modulo-submodulo. 'SQFaaS-front-commons')
+        No nome do sistema, escreva o nome começando por letra maiúscula e o formate como o nome oficial, por exemplo: SCAFplusNET.
+    validations:
+      required: true
+      
+  - type: input
+    id: repository-description
+    attributes:
+      label: "Descrição:"
+      description: |
+         Descreva o propósito do repositório
+    validations:
+      required: true
+  
+  - type: markdown
+    attributes:
+      value: |
+        ## :department_store: **Configuração de compliance**   
+   
+  - type: dropdown
+    id: compliance-estrategiabranch
+    attributes:
+      label: "Release Stage:"
+      description: Selecione a estratégia de branch
+      options:
+        - GitFlow
+        - Trunk Based
+        - Outros
+    validations:
+      required: true
+  
+  - type: textarea
+    id: branch-release-complete
+    attributes:
+      label: Branchs principais
+      description: Quem poderá fazer merge do Pull Request na branch principal (main, release etc)?
+      placeholder: (main, release etc)
+    validations:
+      required: true
+      
